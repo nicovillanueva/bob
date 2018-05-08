@@ -68,7 +68,7 @@ func (bn BuildNotification) ToText() string {
 	switch bn.Phase {
 	case STARTED:
 		prefix = EmojiProvider{}.Start()
-		return fmt.Sprintf("%s Inició el build de **%s** [%s]", prefix, bn.Project, bn.FullUrl)
+		return fmt.Sprintf("%s Inició el build de *%s*\n[%s]", prefix, bn.Project, bn.FullUrl)
 	case FINISHED:
 		switch bn.Result {
 		case OK:
@@ -78,10 +78,10 @@ func (bn BuildNotification) ToText() string {
 		case ABORTED:
 			prefix = EmojiProvider{}.Aborted()
 		}
-		return fmt.Sprintf("%s Terminó el build de **%s** con resultado: %s [%s]", prefix, bn.Project, bn.Result, bn.FullUrl)
+		return fmt.Sprintf("%s Terminó el build de *%s* con resultado: %s\n[%s]", prefix, bn.Project, bn.Result, bn.FullUrl)
 	case WAITING:
 		prefix = EmojiProvider{}.Waiting()
-		return fmt.Sprintf("%s El build de **%s** está esperando input! [%s]", prefix, bn.Project, bn.FullUrl)
+		return fmt.Sprintf("%s El build de *%s* está esperando input!\n[%s]", prefix, bn.Project, bn.FullUrl)
 	default:
 		prefix = EmojiProvider{}.Unknown()
 		return fmt.Sprintf("%s Evento desconocido: %+v", prefix, bn)
@@ -98,7 +98,7 @@ type PullRequestNotification struct {
 
 func (prn PullRequestNotification) ToText() string {
 	prefix := EmojiProvider{}.PullRequest()
-	return fmt.Sprintf("%s Nuevo PullRequest de %s para el branch **%s** de *%s* (PR #%s) [%s]",
+	return fmt.Sprintf("%s Nuevo PullRequest de %s para el branch *%s* de _%s_ (PR #%s)\n[%s]",
 		prefix, prn.Author, prn.Target, prn.Project, prn.ChangeId, prn.ChangeUrl)
 }
 
